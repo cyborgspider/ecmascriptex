@@ -21,8 +21,8 @@ gulp.task('server', function(){
   })
 });
 
-gulp.task('clean', function(cb){
-  clean(config.outputDir, cb);
+gulp.task('clean', function(){
+  clean(config.outputDir);
 });
 
 gulp.task('watch', function(){
@@ -36,10 +36,10 @@ gulp.task('watch', function(){
  * FED tasks
  */
 gulp.task('images', function(){
+  //Disabled in the inital build. Put inside gulp build when needed.
   return gulp
     .src('./images/*')
     .pipe(gulp.dest(config.outputDir + '/img'))
-    .pipe(gulp.dest(config.docOutputDir + '/img'))
 });
 
 gulp.task('stylus', function(){
@@ -53,10 +53,9 @@ gulp.task('stylus', function(){
       use:      [nib(),jeet()],
       compress: true
     }))
-    .pipe($.rename('rx.css'))
+    .pipe($.rename('styles.css'))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(config.outputDir + '/css'))
-    .pipe(gulp.dest(config.docOutputDir + '/css'))
     .pipe($.livereload())
 });
 
@@ -65,10 +64,10 @@ gulp.task('js', function(){
     .src('./scripts/*.coffee')
     .pipe($.coffee({bare:false}))
     .pipe($.concat('doc.js'))
-    .pipe(gulp.dest(config.docOutputDir + '/js'))
+    .pipe(gulp.dest(config.outputDir + '/js'))
     .pipe($.uglify())
     .pipe($.rename({extname:'.min.js'}))
-    .pipe(gulp.dest(config.docOutputDir + '/js'))
+    .pipe(gulp.dest(config.outputDir + '/js'))
     .pipe($.livereload())
 });
 
@@ -76,20 +75,20 @@ gulp.task('html', function(){
   return gulp
     .src(['*.jade'])
     .pipe($.jade({pretty: false}))
-    .pipe(gulp.dest(config.docOutputDir))
+    .pipe(gulp.dest(config.outputDir))
     .pipe($.livereload())
 });
 
 gulp.task('copyFonts', function(){
+  //Disabled in the inital build. Put inside gulp build when needed.
   return gulp
     .src('./fonts/*')
     .pipe(gulp.dest(config.outputDir + '/fonts'))
-    .pipe(gulp.dest(config.docOutputDir + '/fonts'))
 });
 /**
  * Build/watch/deploy tasks
  */
 gulp.task('default', ['clean'], function(){
   console.log('Building, watching and starting server...');
-  gulp.start('html', 'stylus', 'js', 'images', 'server', 'watch');
+  gulp.start('html', 'stylus', 'server', 'watch');
 });

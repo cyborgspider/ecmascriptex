@@ -2,6 +2,7 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var mkdir = require('mkdirp');
 
 module.exports = yeoman.generators.Base.extend({
   prompting: function () {
@@ -31,6 +32,9 @@ module.exports = yeoman.generators.Base.extend({
 
   writing: {
     app: function () {
+      this.mkdir('dist');
+      this.mkdir('images');
+
       this.fs.copy(
         this.templatePath('_package.json'),
         this.destinationPath('package.json')
@@ -56,8 +60,8 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('scripts/scripts.js')
       );
       this.fs.copy(
-        this.templatePath('stylus/_styles.styl'),
-        this.destinationPath('stylus/styles.styl')
+        this.templatePath('stylus/_index.styl'),
+        this.destinationPath('stylus/index.styl')
       );
     },
 
