@@ -61,9 +61,8 @@ gulp.task('stylus', function(){
 
 gulp.task('js', function(){
   return gulp
-    .src('./scripts/*.coffee')
-    .pipe($.coffee({bare:false}))
-    .pipe($.concat('doc.js'))
+    .src('./scripts/scripts.js')
+    .pipe($.babel())
     .pipe(gulp.dest(config.outputDir + '/js'))
     .pipe($.uglify())
     .pipe($.rename({extname:'.min.js'}))
@@ -90,5 +89,5 @@ gulp.task('copyFonts', function(){
  */
 gulp.task('default', ['clean'], function(){
   console.log('Building, watching and starting server...');
-  gulp.start('html', 'stylus', 'server', 'watch');
+  gulp.start('html', 'stylus', 'js', 'server', 'watch');
 });

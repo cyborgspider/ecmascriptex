@@ -5,6 +5,7 @@
     "browser-sync": "^2.3.1",
     "del": "^2.0.0",
     "gulp": "^3.9.0",
+    "gulp-babel": "^5.2.1",
     "gulp-concat": "^2.5.2",
     "gulp-jade": "^1.0.0",
     "gulp-livereload": "^3.8.0",
