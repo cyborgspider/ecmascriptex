@@ -13,10 +13,12 @@ module.exports = yeoman.generators.Base.extend({
     ));
 
     var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
+      name: 'siteName',
+      message: 'What is the name of your site or project?'
+    },{
+      name: 'authorName',
+      message: 'Who is authoring this site or project?',
+      default: 'Carlos Ortega'
     }];
 
     this.prompt(prompts, function (props) {
