@@ -31,10 +31,6 @@ module.exports = yeoman.generators.Base.extend({
 
   writing: {
     app: function () {
-      this.mkdir('styles');
-      this.mkdir('scripts');
-      this.mkdir('images');
-
       this.fs.copy(
         this.templatePath('_package.json'),
         this.destinationPath('package.json')
@@ -44,27 +40,25 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('bower.json')
       );
       this.fs.copy(
-        this.templatePath('_gulpfile.js');
-        this.destinationPath('gulpfile.js');
-      ):
+        this.templatePath('_gulpfile.js'),
+        this.destinationPath('gulpfile.js')
+      );
       this.fs.copy(
         this.templatePath('_gitignore'),
-        this.destinationPath('.gitignore');
+        this.destinationPath('.gitignore')
       );
       this.fs.copy(
         this.templatePath('_index.jade'),
-        this.destinationPath('index.jade');
+        this.destinationPath('index.jade')
       );
       this.fs.copy(
         this.templatePath('scripts/_scripts.js'),
-        this.destinationPath('scripts/scripts.js');
+        this.destinationPath('scripts/scripts.js')
       );
-
-      // this.fs.copyTpl('_script.coffee', 'src/scripts/scripts.coffee');
-      // this.fs.copyTpl('_script.js', 'src/scripts/scripts.js');
-      // this.fs.copyTpl('_style.styl', 'src/styles/styles.styl');
-      // this.fs.copyTpl('_style.scss', 'src/styles/styles.scss');
-      // this.template('_index.jade', 'src/index.jade');
+      this.fs.copy(
+        this.templatePath('stylus/_styles.styl'),
+        this.destinationPath('stylus/styles.styl')
+      );
     },
 
     projectfiles: function () {
