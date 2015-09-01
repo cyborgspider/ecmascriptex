@@ -70,6 +70,17 @@ gulp.task('js', function(){
     .pipe($.livereload())
 });
 
+gulp.task('js-modules', function(){
+  browserify({
+    entries:'./scripts/scripts.js',
+    debug:true
+  })
+  .transform(babelify)
+  .bundle()
+  .pipe(source('main.js'))
+  .pipe(gulp.dest(config.outputDir + '/js'))
+});
+
 gulp.task('html', function(){
   return gulp
     .src(['*.jade'])
@@ -86,6 +97,7 @@ gulp.task('copyFonts', function(){
 });
 /**
  * Build/watch/deploy tasks
+ * If using modules, switch js to js-modules.
  */
 gulp.task('default', ['clean'], function(){
   console.log('Building, watching and starting server...');
