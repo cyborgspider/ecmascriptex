@@ -85,6 +85,16 @@ gulp.task('js-modules', function(){
   .pipe(gulp.dest(config.outputDir + '/js'))
 });
 */
+
+//Fow now, JS is handled entirely by the webpack process. Thus making this
+//task useless, but kept here for reference.
+gulp.task('js-webpack', function(){
+  return gulp
+    .src('./scripts/')
+    .pipe(webpack( require('./webpack.config.js') ))
+    .pipe(gulp.dest(config.outputDir + '/js'))
+});
+
 gulp.task('html', function(){
   return gulp
     .src(['*.jade'])
