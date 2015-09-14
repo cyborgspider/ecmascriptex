@@ -29,7 +29,8 @@ gulp.task('watch', function(){
   $.livereload.listen();
   gulp.watch('stylus/**/*', ['stylus']);
   gulp.watch(['**/*.jade', '*.jade'], ['html']);
-  gulp.watch('scripts/**/*', ['js']);
+  //No Gulp JS. Webpack is handling this, otherwise add it here
+  //gulp.watch('scripts/**/*', ['js']);
 });
 
 /**
@@ -59,6 +60,8 @@ gulp.task('stylus', function(){
     .pipe($.livereload())
 });
 
+/*
+If you're not using modules, you can use basic Babel
 gulp.task('js', function(){
   return gulp
     .src('./scripts/scripts.js')
@@ -69,7 +72,8 @@ gulp.task('js', function(){
     .pipe(gulp.dest(config.outputDir + '/js'))
     .pipe($.livereload())
 });
-
+If you don't want to use Webpack, Browserify with Babel will work (Babelify)
+Don't forget to npm install babelify --save-dev.
 gulp.task('js-modules', function(){
   browserify({
     entries:'./scripts/scripts.js',
@@ -80,7 +84,7 @@ gulp.task('js-modules', function(){
   .pipe(source('main.js'))
   .pipe(gulp.dest(config.outputDir + '/js'))
 });
-
+*/
 gulp.task('html', function(){
   return gulp
     .src(['*.jade'])
@@ -97,9 +101,9 @@ gulp.task('copyFonts', function(){
 });
 /**
  * Build/watch/deploy tasks
- * If using modules, switch js to js-modules.
+ * If not using Webpack, add js or js-modules.
  */
 gulp.task('default', ['clean'], function(){
   console.log('Building, watching and starting server...');
-  gulp.start('html', 'stylus', 'js', 'server', 'watch');
+  gulp.start('html', 'stylus', 'server', 'watch');
 });

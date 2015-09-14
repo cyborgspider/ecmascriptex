@@ -10,7 +10,7 @@ module.exports = yeoman.generators.Base.extend({
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the remarkable ' + chalk.red('Ecmascriptex') + ' generator!'
+      'Welcome to the spectacular ' + chalk.red('Ecmascriptex') + ' generator!'
     ));
 
     var prompts = [{
@@ -60,8 +60,16 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('scripts/scripts.js')
       );
       this.fs.copy(
+        this.templatePath('scripts/_another-script.js'),
+        this.destinationPath('scripts/another-script.js')
+      );
+      this.fs.copy(
         this.templatePath('stylus/_index.styl'),
         this.destinationPath('stylus/index.styl')
+      );
+      this.fs.copy(
+        this.templatePath('_webpack.config.js'),
+        this.destinationPath('webpack.config.js')
       );
     },
 
